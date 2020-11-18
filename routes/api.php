@@ -3,7 +3,7 @@
 use App\Http\Controllers\Api\CharacterController;
 use App\Http\Controllers\Api\EpisodeController;
 use App\Http\Controllers\Api\QuoteController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\RequestStatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::namespace('Api')->middleware(['auth:api', 'throttle:20'])->group(function () {
+Route::namespace('Api')->middleware(['auth:api', 'throttle:20', 'request.counter'])->group(function () {
     Route::get('/characters', [CharacterController::class, 'index']);
     Route::get('/characters/random', [CharacterController::class, 'random']);
 
@@ -27,7 +27,7 @@ Route::namespace('Api')->middleware(['auth:api', 'throttle:20'])->group(function
     Route::get('/quotes', [QuoteController::class, 'index']);
     Route::get('/quotes/random', [QuoteController::class, 'random']);
 
+    Route::get('/stats', [RequestStatController::class, 'stats']);
+    Route::get('/my-stats', [RequestStatController::class, 'myStats']);
 });
 
-//    Route::get('/stats', [ApiRequestStats::class, 'allStats']);
-//    Route::get('/my-stats', [ApiRequestStats::class, 'myStats']);
