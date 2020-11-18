@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::namespace('Api')->group(function () {
+Route::namespace('Api')->middleware('auth:api')->group(function () {
     Route::get('/characters', [CharacterController::class, 'index']);
     Route::get('/characters/random', [CharacterController::class, 'random']);
 
