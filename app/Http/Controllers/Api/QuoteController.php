@@ -24,4 +24,15 @@ class QuoteController extends Controller
 
         return $response ? responder()->success($response)->respond() : responder()->error(404, __('Quote author not found'));
     }
+
+    public function characterQuotes($characterId)
+    {
+        $query = Quote::whereHas('character', function ($q) use ($characterId) {
+            $q->where('id', $characterId);
+        });
+
+        $response = $query->get();
+
+        return $response ? responder()->success($response)->respond() : responder()->error(404, __('Quote not found'));
+    }
 }

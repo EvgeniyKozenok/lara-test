@@ -25,6 +25,7 @@ Route::namespace('Api')->middleware(['auth:api', 'throttle:20', 'request.counter
     Route::get('/episodes/{id}', [EpisodeController::class, 'show']);
 
     Route::get('/quotes', [QuoteController::class, 'index']);
+    Route::get('/quotes/characters/{characterId}', [QuoteController::class, 'characterQuotes']);
     Route::get('/quotes/random', [QuoteController::class, 'random']);
 
     Route::get('/stats', [RequestStatController::class, 'stats']);
